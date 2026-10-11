@@ -1,6 +1,6 @@
-hmwm (horrendous micro window manager) is a window manager i made since i was frustrated at how BIG the source code of the window manager,made by the suckless developers "dwm" is. that's why i have come up with this window manager. it runs on under 250 lines of code,which is what i imagine an actual light window manager and suckless should be like.
+hmwm (horrendous micro window manager) is a window manager i have made since i was frustrated at how BIG the source code of the window manager,made by the suckless developers "dwm" was. that's why i have come up with this minimal/lightweight window manager. it runs on under 250 lines of C code,which is what i imagine an actual light window manager/suckless utility to be like.
 <img width="2172" height="724" alt="image" src="https://github.com/user-attachments/assets/3861bd29-bf82-4585-86bc-8a66dc5273a8" />
-the window manager contains most of the things that i would found useful (3 workspaces as an example,or no fullscreen option). the window manager doesn't contain much,since I don't want to overwhelm the user with a bunch of features which they wouldn't even use (you should be able to see all of the things it can do inside of the config.h file). 
+the window manager contains most of the things that i would find useful (3 workspaces as an example,or no fullscreen option). the window manager doesn't contain much,since I don't want to overwhelm the user with a bunch of features,which they wouldn't even use (you should be able to see all of the things it can do,inside of the config.h file). 
 If you're too lazy to read it. here they are:
 
 1 - focusing between windows
