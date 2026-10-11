@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include <X11/Xlib.h>
 #include <X11/keysym.h>
 #include <X11/cursorfont.h>
@@ -23,9 +24,18 @@ static void spawn(const char **);
 static int locate(Window, int *);
 static void remove_win(int, int);
 
+static int xerror(Display *d, XErrorEvent *e) {
+    char msg[128];
+    XGetErrorText(d, e->error_code, msg, sizeof(msg));
+    fprintf(stderr, "hmwm X error: %s, request=%d, resource=%lu\n",
+            msg, e->request_code, e->resourceid);
+    return 0;
+}
+
 int main(void)
 {
     if (!(dpy = XOpenDisplay(NULL))) return 1;
+    XSetErrorHandler(xerror);
     signal(SIGCHLD, SIG_IGN);
     root = DefaultRootWindow(dpy);
     protocols = XInternAtom(dpy, "WM_PROTOCOLS", False);
@@ -129,7 +139,7 @@ static void remove_win(int s, int i) {
 
 static void focus_win(void) {
     int n = count[ws];
-    if (!n) { XSetInputFocus(dpy, root, RevertToPointerRoot, CurrentTime); return; }
+    if (!n) return;
     for (int i = 0; i < n; i++) XSetWindowBorder(dpy, wins[ws][i], i == focus[ws] ? COLOR_FOCUSED : 0x222222);
     Window w = wins[ws][focus[ws]];
     XRaiseWindow(dpy, w); XSetInputFocus(dpy, w, RevertToPointerRoot, CurrentTime);
