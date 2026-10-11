@@ -5,7 +5,7 @@ If you're too lazy to read it. here they are:
 
 1 - focusing between windows with the bindings of your choice
 
-2 - If you're mouse hovers over a window,the window immediately gets focused upon (might be annoying for some people,though its useful for example if you're writing code from a C tutorial and u have to pause the video,you can just hover your mouse over the browser window and pause the video).
+2 - If your mouse hovers over a window,the window immediately gets focused upon (might be an annoyance for some users,though i find it useful since if you're writing code from a C tutorial and u have to pause the video,you can just hover your mouse over the browser window and pause the video).
 
 3 - resizing windows left and right
 
@@ -16,7 +16,9 @@ If you're too lazy to read it. here they are:
 This window manager was inspired by :
 
 dwm (https://dwm.suckless.org)
+
 sxwm (https://github.com/uint23/sxwm)
+
 ewm (https://github.com/pwnwriter/ewm)
 
 example photo of my window manager:
