@@ -16,3 +16,4 @@ This window manager was inspired by :
 dwm (https://dwm.suckless.org)
 sxwm (https://github.com/uint23/sxwm)
 ewm (https://github.com/pwnwriter/ewm)
+<img width="1366" height="768" alt="2026-10-11-204213_1366x768_scrot" src="https://github.com/user-attachments/assets/707d58f3-9ef9-46b6-9c27-bf5d29e75410" />
