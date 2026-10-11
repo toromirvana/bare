@@ -35,6 +35,6 @@ example photo of my window manager running on 70 MBS of ram. (the right terminal
 # quick setup
 
 ```bash
-git clone https://github.com/toromirvana/hmm.git
+git clone https://github.com/toromirvana/hmwm.git
 make
-sudo/doas make install
+sudo make install || doas make install
