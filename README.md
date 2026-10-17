@@ -1,11 +1,11 @@
-> *"Simplicity is prerequisite for realiability."* - Edsger W. Dijkstra
+> *"Simplicity is prerequisite for reliability."* - Edsger W. Dijkstra
 
-hmwm (horrendous micro window manager) is a window manager i have made since i was frustrated at how large the source code of the window manager dwm had gotten,while they were still promoting "suckless" software. that's why i have come up with an ultra minimalist window manager which runs on under **250** lines of C code,which is what i imagine an actual light window manager should be striving for.
+hmwm (horrendous micro window manager) is a window manager i have made since i was frustrated at how large the source code of the window manager dwm had gotten,while they were still promoting "suckless" software. that's why i have come up with an ultra minimalist window manager,which runs on under **250** lines of C code,which is what i imagine an actual light window manager should be striving for.
 <img width="2172" height="724" alt="image" src="https://github.com/user-attachments/assets/3861bd29-bf82-4585-86bc-8a66dc5273a8" />
 
 # My Philosophy 
 
-`hmwm` contains only the features I use every single day. There is no massive feature list here because **I don’t want to overwhelm you** with options you will never touch. If a feature isn't essential to a lightning-fast, distraction-free environment, it doesn't belong. this reminds me of what st had become as a terminal,so many features that people don't even know about,for example did you know that you can zoom in with ctrl + Shift + Page up and Down inside of the st terminal?
+`hmwm` contains only the features I use every single day. There is no massive feature list here because **I don’t want to overwhelm you** with options you will never touch. If a feature isn't essential to a lightning-fast, distraction-free environment, it doesn't belong. this reminds me of what st had become as a terminal,it has so many features,which nobody even uses.
 
 # Features
 
