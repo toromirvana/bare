@@ -23,7 +23,8 @@ typedef enum {
 	KILL_WIN,
 	EXIT_WM,
 	CMD_GROW,
-	CMD_SHRINK
+	CMD_SHRINK,
+	TILE_WIN
 } Action;
 
 typedef struct {
@@ -40,6 +41,7 @@ static const KeyBind keys[] = {
 	{ MODKEY,		XK_k,		FOCUS_PREV },
 	{ MODKEY,		XK_h,		CMD_SHRINK },
 	{ MODKEY,		XK_l,		CMD_GROW },
+	{ MODKEY|ShiftMask,     XK_t,           TILE_WIN },
 	{ MODKEY,		XK_q,		KILL_WIN },
 	{ MODKEY|ShiftMask,     XK_e,           EXIT_WM },
 	{ MODKEY,		XK_1,		WS_1 },

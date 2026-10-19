@@ -1,40 +1,47 @@
-> *"Simplicity is prerequisite for reliability."* - Edsger W. Dijkstra
+> *"Simplicity is prerequisite for reliability."* — Edsger W. Dijkstra
 
-hmwm (horrendous micro window manager) is a window manager i have made since i was frustrated at how large the source code of the window manager dwm had gotten,while they were still promoting "suckless" software. that's why i have come up with an ultra minimalist window manager,which runs on under **250** lines of C code,which is what i imagine an actual light window manager should be striving for.
-<img width="2172" height="724" alt="image" src="https://github.com/user-attachments/assets/3861bd29-bf82-4585-86bc-8a66dc5273a8" />
+**bare** is a minimal X11 window manager written in C.
 
-# My Philosophy 
+I started this project because I was frustrated with how large the source code of `dwm` had become while still promoting the idea of "suckless" software. I wanted something smaller, simpler, and easier to understand, so I decided to build my own window manager.
 
-`hmwm` contains only the features I use every single day. There is no massive feature list here because **I don’t want to overwhelm you** with options you will never touch. If a feature isn't essential to a lightning-fast, distraction-free environment, it doesn't belong. this reminds me of what st had become as a terminal,it has so many features,which nobody even uses.
+The goal isn't to have the most features or the fewest lines of code possible. It's to have only what is useful, without unnecessary complexity.
 
-# Features
+## My philosophy
 
-to show you how much my window manager contains in just those lines without having u click onto the config.h,here they are:
+`bare` contains only the features I use every day. I don't want to overwhelm users with options they may never touch. If a feature isn't useful for a simple, distraction-free desktop, it probably doesn't belong.
 
-1 - focusing between windows
+This philosophy also reminds me of what happened to terminals like `st`: over time, software can accumulate features that many users don't even know exist. I want `bare` to stay small enough that its source code remains approachable and understandable.
 
-2 - If your mouse hovers over a window,the window immediately gets focused upon (might be an annoyance for some users,though i find it useful since if you're writing code from a C tutorial and u have to pause the video,you can just hover your mouse over the browser window and pause the video).
+## Features
 
-3 - resizing windows left and right
+- **Tiling:** Automatically arranges windows on the desktop.
+- **Workspaces:** Switch between three workspaces.
+- **Keyboard shortcuts:** Control windows and launch applications from the keyboard.
+- **Hover focus:** Focus a window by moving the mouse over it.
+- **Floating windows:** Move and resize floating windows using the mouse.
+- **Return to tiling:** Send a floating window back to the tiling layout.
+- **Configurable focus border:** Change the focused window's border color in `config.h`. The default is gray (`0x444444`).
+- **Lightweight:** Designed to keep the implementation small and avoid unnecessary overhead.
 
-4 - focusing color. You can change the color of your focused window in the config.h (the default color is gray,which is 0x444444)
+## Screenshots
 
-5 - The window manager supports floating windows (as you can see by the photo at the bottom.)
+In my own setup, `bare` used approximately 2.8 MiB of resident memory (RSS). Memory usage varies depending on the system and workload.
 
-This window manager was inspired by :
+## Configuration
 
-dwm (https://dwm.suckless.org)
+Configuration is kept in `config.h`, where you can customize keybindings and other settings without digging through the main source file.
 
-sxwm (https://github.com/uint23/sxwm)
+## Installing the window manager
 
-ewm (https://github.com/pwnwriter/ewm)
-
-example photo of my window manager running on 70 MBS of ram. (the right terminal shows that hmwm only uses 2.8 MBS of ram RSS):
-<img width="1366" height="768" alt="2026-10-11-204213_1366x768_scrot" src="https://github.com/user-attachments/assets/707d58f3-9ef9-46b6-9c27-bf5d29e75410" />
-
-# quick setup
-
-```bash
-git clone https://github.com/toromirvana/hmwm.git
+```sh
+git clone https://codeberg.org/toromirvana/bare.git
+cd bare
 make
 sudo make install || doas make install
+```
+
+## Inspiration
+
+- [dwm](https://dwm.suckless.org/)
+- [sxwm](https://github.com/uint23/sxwm)
+- [ewm](https://github.com/pwnwriter/ewm)

@@ -24,6 +24,8 @@ static void spawn(const char **);
 static int locate(Window, int *);
 static void remove_win(int, int);
 static void mouse_move(XButtonEvent *);
+static unsigned int numlock_mask(void);
+static void grab_keys(void);
 
 int main(void)
 {
@@ -34,8 +36,7 @@ int main(void)
     wm_delete = XInternAtom(dpy, "WM_DELETE_WINDOW", False);
     XDefineCursor(dpy, root, XCreateFontCursor(dpy, XC_left_ptr));
     XSelectInput(dpy, root, SubstructureRedirectMask | SubstructureNotifyMask);
-    for (unsigned int i = 0; i < sizeof(keys)/sizeof(*keys); i++)
-        XGrabKey(dpy, XKeysymToKeycode(dpy, keys[i].keysym), keys[i].mod, root, True, GrabModeAsync, GrabModeAsync);
+    grab_keys();
 
     XEvent e;
     while (running) {
@@ -96,6 +97,13 @@ int main(void)
                 case EXIT_WM: running = 0; break;
                 case CMD_GROW: if (mfact < 0.95) { mfact += 0.05; tile(); } break;
                 case CMD_SHRINK: if (mfact > 0.05) { mfact -= 0.05; tile(); } break;
+                case TILE_WIN:
+                    if (count[ws] && floating[ws][focus[ws]]) {
+                        floating[ws][focus[ws]] = 0;
+                        tile();
+                        focus_win();
+                    }
+                    break;
                 }
                 break;
             }
@@ -103,6 +111,52 @@ int main(void)
     }
     XCloseDisplay(dpy);
     return 0;
+}
+
+static unsigned int numlock_mask(void)
+{
+    XModifierKeymap *map = XGetModifierMapping(dpy);
+    KeyCode code = XKeysymToKeycode(dpy, XK_Num_Lock);
+    unsigned int mask = 0;
+
+    if (!map || !code) {
+        if (map) XFreeModifiermap(map);
+        return 0;
+    }
+
+    for (int mod = 0; mod < 8; mod++) {
+        for (int key = 0; key < map->max_keypermod; key++) {
+            if (map->modifiermap[mod * map->max_keypermod + key] == code)
+                mask |= 1U << mod;
+        }
+    }
+
+    XFreeModifiermap(map);
+    return mask;
+}
+
+static void grab_keys(void)
+{
+    unsigned int numlock = numlock_mask();
+    unsigned int locks[] = { 0, LockMask, numlock, LockMask | numlock };
+
+    for (unsigned int i = 0; i < sizeof(keys) / sizeof(*keys); i++) {
+        KeyCode code = XKeysymToKeycode(dpy, keys[i].keysym);
+        for (unsigned int j = 0; j < sizeof(locks) / sizeof(*locks); j++) {
+            unsigned int mod = keys[i].mod | locks[j];
+            int duplicate = 0;
+
+            for (unsigned int k = 0; k < j; k++) {
+                if (locks[k] == locks[j]) {
+                    duplicate = 1;
+                    break;
+                }
+            }
+            if (!duplicate)
+                XGrabKey(dpy, code, mod, root, True,
+                         GrabModeAsync, GrabModeAsync);
+        }
+    }
 }
 
 static void spawn(const char **cmd)
