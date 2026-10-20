@@ -2,8 +2,8 @@ CC ?= gcc
 CFLAGS = -Os -Wall -Wextra -s -fno-asynchronous-unwind-tables -fno-ident
 LDLIBS = -lX11
 
-TARGET = hmwm
-SRC = hmwm.c
+TARGET = bare
+SRC = bare.c
 
 all: $(TARGET)
 
