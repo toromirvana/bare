@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <signal.h>
+#include <string.h>
 #include "config.h"
 
 #define NWS 3
@@ -27,9 +28,17 @@ static void mouse_move(XButtonEvent *);
 static unsigned int numlock_mask(void);
 static void grab_keys(void);
 
+static int xerror(Display *dpy, XErrorEvent *e)
+{
+	(void)dpy;
+	(void)e;
+	return 0;
+}
+
 int main(void)
 {
     if (!(dpy = XOpenDisplay(NULL))) return 1;
+    XSetErrorHandler(xerror);
     signal(SIGCHLD, SIG_IGN);
     root = DefaultRootWindow(dpy);
     protocols = XInternAtom(dpy, "WM_PROTOCOLS", False);
@@ -172,14 +181,20 @@ static int locate(Window w, int *owner)
 }
 static void remove_win(int s, int i)
 {
-    int removed = i;
-    for (; i < count[s] - 1; i++) {
-        wins[s][i] = wins[s][i + 1];
-        floating[s][i] = floating[s][i + 1];
+	int old_count = count[s];
+
+    if (i < old_count - 1) {
+        memmove(&wins[s][i], &wins[s][i + 1],
+                (old_count - i - 1) * sizeof wins[s][0]);
+        memmove(&floating[s][i], &floating[s][i + 1],
+                (old_count - i - 1) * sizeof floating[s][0]);
     }
-    if (--count[s] == 0) focus[s] = 0;
+
+    count[s]--;
+
+    if (!count[s]) focus[s] = 0;
     else if (focus[s] >= count[s]) focus[s] = count[s] - 1;
-    else if (focus[s] > removed) focus[s]--;
+    else if (focus[s] > i) focus[s]--;
 }
 
 static void focus_win(void)
