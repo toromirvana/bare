@@ -1,8 +1,14 @@
 CC ?= gcc
-CFLAGS = -Os -Wall -Wextra -s -fno-asynchronous-unwind-tables -fno-ident
-LDLIBS = -lX11
+CFLAGS = -Os -Wall -Wextra -s -fno-asynchronous-unwind-tables -fno-ident -I/usr/local/include
+LDLIBS = -L/usr/local/lib -lX11
+
+#BSD Users,uncomment these lines
+CFLAGS = -Os -Wall -Wextra -s -fno-asynchronous-unwind-tables -fno-ident -I/usr/local/include
+LDLIBS = -L /usr/local/lib -lX11
 
 TARGET = bare
+# BSD Users will have to change it to barex.
+TARGET = barex
 SRC = bare.c
 
 all: $(TARGET)

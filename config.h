@@ -11,12 +11,14 @@
 /* Applications */
 static const char *terminal[] = { "st", NULL };
 static const char *launcher[] = { "dmenu_run", NULL };
+static const char *browser[] = { "firefox", NULL };
 
 #define MODKEY Mod4Mask
 
 typedef enum {
     CMD_TERM,
     CMD_LAUNCH,
+    CMD_BROWSER,
     WS_1, WS_2, WS_3,
     MOV_WS_1, MOV_WS_2, MOV_WS_3,
     FOCUS_NEXT, FOCUS_PREV,
@@ -34,13 +36,14 @@ typedef struct {
 } KeyBind;
 
 static const KeyBind keys[] = {
-    { MODKEY,            XK_t,     CMD_TERM },
+    { MODKEY,            XK_Return, CMD_TERM },
     { MODKEY,            XK_p,      CMD_LAUNCH },
     { MODKEY,            XK_j,      FOCUS_NEXT },
+    { MODKEY,            XK_b,      CMD_BROWSER },
     { MODKEY,            XK_k,      FOCUS_PREV },
     { MODKEY,            XK_h,      CMD_SHRINK },
     { MODKEY,            XK_l,      CMD_GROW },
-    { MODKEY,            XK_a,      TILE_WIN },
+    { MODKEY,            XK_t,      TILE_WIN },
     { MODKEY,            XK_q,      KILL_WIN },
     { MODKEY|ShiftMask,  XK_e,      EXIT_WM },
     { MODKEY,            XK_1,      WS_1 },
