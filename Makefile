@@ -8,7 +8,7 @@ LDLIBS = -L /usr/local/lib -lX11
 
 TARGET = bare
 # BSD Users will have to change it to barex.
-TARGET = barex
+# TARGET = barex
 SRC = bare.c
 
 all: $(TARGET)
